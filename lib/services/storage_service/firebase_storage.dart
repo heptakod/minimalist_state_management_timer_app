@@ -18,7 +18,7 @@ class FirebaseStorage extends StorageService {
     if (response.body == 'null') {
       return 0;
     }
-    final int timeLeft = json.decode(response.body);
+    final int timeLeft = json.decode(response.body) as int;
     print(response.body);
     // print(listData['-NcqnDc6KCzu_ky3UAdR']['timeLeft']);
     return timeLeft;

@@ -33,14 +33,14 @@ class _TimerPageState extends State<TimerPage> {
     debugPrint('building MyHomePage');
     return Scaffold(
       appBar: AppBar(title: const Text('My Timer App')),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TimerStartFrom(),
-            SizedBox(height: 20),
+            const TimerStartFrom(),
+            const SizedBox(height: 20),
             TimerTextWidget(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ButtonsContainer(),
           ],
         ),
@@ -50,7 +50,7 @@ class _TimerPageState extends State<TimerPage> {
 }
 
 class TimerTextWidget extends StatelessWidget with GetItMixin {
-  TimerTextWidget({Key? key}) : super(key: key);
+  TimerTextWidget({super.key});
   @override
   Widget build(BuildContext context) {
     //final stateManager = getIt<TimerPageManager>();
@@ -65,7 +65,7 @@ class TimerTextWidget extends StatelessWidget with GetItMixin {
 }
 
 class ButtonsContainer extends StatelessWidget with GetItMixin {
-  ButtonsContainer({Key? key}) : super(key: key);
+  ButtonsContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,20 +76,20 @@ class ButtonsContainer extends StatelessWidget with GetItMixin {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (buttonState == ButtonState.initial) ...[
-          StartButton(),
+          const StartButton(),
         ],
         if (buttonState == ButtonState.started) ...[
-          PauseButton(),
-          SizedBox(width: 20),
-          ResetButton(),
+          const PauseButton(),
+          const SizedBox(width: 20),
+          const ResetButton(),
         ],
         if (buttonState == ButtonState.paused) ...[
-          StartButton(),
-          SizedBox(width: 20),
-          ResetButton(),
+          const StartButton(),
+          const SizedBox(width: 20),
+          const ResetButton(),
         ],
         if (buttonState == ButtonState.finished) ...[
-          ResetButton(),
+          const ResetButton(),
         ],
       ],
     );
