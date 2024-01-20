@@ -1,13 +1,20 @@
-import 'package:flutter/foundation.dart';
+//import 'dart:async';
+
+import 'notifiers/button_notifier.dart';
 import 'notifiers/time_left_notifier.dart';
 
 class TimerPageManager {
   // state notifiers
-  final timeLeftNotifier = TimeLeftNotifier();
-  final buttonNotifier = ValueNotifier<ButtonState>(ButtonState.initial);
+
+  final buttonNotifier = ButtonNotifer();
+  final timeLeftNotifier = TimeLeftNotifier(10);
 
   void initTimerState() {
     timeLeftNotifier.initialize();
+  }
+
+  String getInitialTimerValue() {
+    return timeLeftNotifier.initialValue.toString();
   }
 
   void start() {
@@ -35,19 +42,12 @@ class TimerPageManager {
     buttonNotifier.value = ButtonState.paused;
   }
 
-  void reset() {
-    timeLeftNotifier.reset();
+  void reset([int? time]) {
+    timeLeftNotifier.reset(time);
     buttonNotifier.value = ButtonState.initial;
   }
 
   void dispose() {
     timeLeftNotifier.dispose();
   }
-}
-
-enum ButtonState {
-  initial,
-  started,
-  paused,
-  finished,
 }

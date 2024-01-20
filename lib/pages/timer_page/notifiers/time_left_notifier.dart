@@ -5,10 +5,14 @@ import 'package:timer_app/services/service_locator.dart';
 import 'package:timer_app/services/storage_service/storage_service.dart';
 
 class TimeLeftNotifier extends ValueNotifier<String> {
-  TimeLeftNotifier() : super(_durationString(_initialValue));
+  TimeLeftNotifier(this._initialValue) : super(_durationString(_initialValue));
 
-  static const int _initialValue = 10;
-  int _currentTimeLeft = _initialValue;
+  int _initialValue;
+  late int _currentTimeLeft = _initialValue;
+
+  int get initialValue {
+    return _initialValue;
+  }
 
   final Ticker _ticker = Ticker();
   StreamSubscription<int>? _tickerSubscription;
@@ -47,9 +51,11 @@ class TimeLeftNotifier extends ValueNotifier<String> {
     });
   }
 
-  void reset() {
+  void reset(int? timerFrom) {
     _tickerSubscription?.cancel();
-    _updateTimeLeft(_initialValue);
+    int newTime = timerFrom ?? _initialValue;
+    _updateTimeLeft(newTime);
+    _initialValue = newTime;
   }
 
   void pause() {
